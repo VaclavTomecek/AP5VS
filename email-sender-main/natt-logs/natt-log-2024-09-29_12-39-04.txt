@@ -1,0 +1,82 @@
+[12:39:04][PluginLoader][WARNING] Plugins directory not found.
+[12:39:04][ProcessManager][WARNING] Failed to read PIDs: pid-list.txt (Syst�m nem��e nal�zt uveden� soubor)
+[12:39:04][NATTCore][INFO] NATT CORE initialization done
+Version: 1.7.0 
+Configuration path: https://gitlab.com/ap5vs/test-config/email-sender-config/-/raw/main/test-config-1.yaml?ref_type=heads
+Configuration loading mode: FROM URL
+[12:39:04][NATTCore][INFO] Working directory path: G:\Bordel\�kola\UTB\V�voj s�ov�ch aplikac� ( JAVA )\email-sender-main\email-sender-main
+[12:39:04][NATTCore][INFO] Start loading of the configuration file ...
+[12:39:05][NetworkIO][INFO] Yaml data has been loaded from network location (https://gitlab.com/ap5vs/test-config/email-sender-config/-/raw/main/test-config-1.yaml?ref_type=heads)
+[12:39:05][NATTCore][INFO] Configuration loading done
+[12:39:05][NATTCore][INFO] Start building test structure according to the configuration ...
+[12:39:05][NATTCore][INFO] Test structure ...
+[12:39:05][NATTCore][INFO] Test structure building done
+[12:39:05][NATTCore][INFO] Start test executing ...
+[12:39:05][TestReportGenerator][INFO] Extenet reports generated. Final report will be saved to file: test_report.html
+[12:39:05][NATTCore][INFO] Starts execution on the root keyword  ...
+[12:39:05][MessageBuffer][INFO] Message buffer created for module with name: server-1
+[12:39:05][SMTPEmailServer][INFO] (server-1) SMTP Email Server is listening on port: 9999
+[12:39:05][TestSuiteKw][INFO] Test case 'Test odeslání emailu' starts executing now
+[12:39:05][MessageBuffer][INFO] Message buffer created for module with name: default
+[12:39:05][ExternalProgramRunner][INFO] (default) Run external app with command: java -jar app/build/libs/app.jar localhost 9999 sender@email.com recipient@email.com Subject1 'Text Message'
+[12:39:05][ProcessManager][INFO] New PID (35636) added to file
+[12:39:05][WaitUntilKw][INFO] Waiting for action. Actions count: 1, Time out: 5000 ms
+[12:39:05][ProcessManager][INFO] PID (35636) removed from file
+[12:39:05][ExternalProgramRunner][WARNING] (default) External application ends with error: 1
+[12:39:05][ExternalProgramRunner][WARNING] (default) Error message from external application: Error: Unable to access jarfile app/build/libs/app.jar
+
+[12:39:10][WaitUntilKw][WARNING] Timeout.. Action was not invoked!
+[12:39:10][NATTContext][INFO] Data has been stored in to the variable 'var-1'. Data value: 0
+[12:39:10][AssertEqualsKw][WARNING] Assertion failed. True was expected as the result. Condition: (Expected value '1,000000' must be same as the value of the variable '0')
+[12:39:10][WaitKw][INFO] Waiting: 500 ms
+[12:39:11][TestSuiteKw][ERROR] Test suite 'Zakladní test odesílání Emailů' - Test case 'Test odeslání emailu' failed
+[12:39:11][MessageBuffer][INFO] Message buffer cleared
+[12:39:12][TestSuiteKw][INFO] Test case 'Test obsahu emailu 1' starts executing now
+[12:39:12][ExternalProgramRunner][INFO] (default) Run external app with command: java -jar app/build/libs/app.jar localhost 9999 sender@email.com recipient@email.com Subject1 'Text Message'
+[12:39:12][ProcessManager][INFO] New PID (25012) added to file
+[12:39:12][WaitUntilKw][INFO] Waiting for action. Actions count: 1, Time out: 5000 ms
+[12:39:12][ProcessManager][INFO] PID (25012) removed from file
+[12:39:12][ExternalProgramRunner][WARNING] (default) External application ends with error: 1
+[12:39:12][ExternalProgramRunner][WARNING] (default) Error message from external application: Error: Unable to access jarfile app/build/libs/app.jar
+
+[12:39:17][WaitUntilKw][WARNING] Timeout.. Action was not invoked!
+[12:39:17][NATTContext][INFO] Data has been stored in to the variable 'var-1'. Data value: 
+[12:39:17][AssertEqualsKw][WARNING] Assertion failed. True was expected as the result. Condition: (Value of variable '' must equals expected text 'Text Message')
+[12:39:17][WaitKw][INFO] Waiting: 500 ms
+[12:39:17][TestSuiteKw][ERROR] Test suite 'Zakladní test odesílání Emailů' - Test case 'Test obsahu emailu 1' failed
+[12:39:17][MessageBuffer][INFO] Message buffer cleared
+[12:39:18][TestSuiteKw][INFO] Test case 'Test obsahu emailu 2' starts executing now
+[12:39:18][ExternalProgramRunner][INFO] (default) Run external app with command: java -jar app/build/libs/app.jar localhost 9999 sender@email.com recipient@email.com Subject1111 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin mattis lacinia justo. Curabitur bibendum justo non orci. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+[12:39:18][ProcessManager][INFO] New PID (7608) added to file
+[12:39:18][WaitUntilKw][INFO] Waiting for action. Actions count: 1, Time out: 5000 ms
+[12:39:18][ProcessManager][INFO] PID (7608) removed from file
+[12:39:18][ExternalProgramRunner][WARNING] (default) External application ends with error: 1
+[12:39:18][ExternalProgramRunner][WARNING] (default) Error message from external application: Error: Unable to access jarfile app/build/libs/app.jar
+
+[12:39:23][WaitUntilKw][WARNING] Timeout.. Action was not invoked!
+[12:39:23][NATTContext][INFO] Data has been stored in to the variable 'var-1'. Data value: 
+[12:39:23][AssertEqualsKw][WARNING] Assertion failed. True was expected as the result. Condition: (Value of variable '' must contains expected text 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin mattis lacinia justo. Curabitur bibendum justo non orci. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.')
+[12:39:23][WaitKw][INFO] Waiting: 500 ms
+[12:39:23][TestSuiteKw][ERROR] Test suite 'Zakladní test odesílání Emailů' - Test case 'Test obsahu emailu 2' failed
+[12:39:23][MessageBuffer][INFO] Message buffer cleared
+[12:39:24][TestSuiteKw][INFO] Test case 'Test odeslání neplatného emailu' starts executing now
+[12:39:24][ExternalProgramRunner][INFO] (default) Run external app with command: java -jar app/build/libs/app.jar localhost 9999 sender@email.com recipient@email.com
+[12:39:24][ProcessManager][INFO] New PID (36760) added to file
+[12:39:24][WaitKw][INFO] Waiting: 3000 ms
+[12:39:24][ProcessManager][INFO] PID (36760) removed from file
+[12:39:24][ExternalProgramRunner][WARNING] (default) External application ends with error: 1
+[12:39:24][ExternalProgramRunner][WARNING] (default) Error message from external application: Error: Unable to access jarfile app/build/libs/app.jar
+
+[12:39:27][NATTContext][INFO] Data has been stored in to the variable 'var-1'. Data value: 0
+[12:39:27][WaitKw][INFO] Waiting: 500 ms
+[12:39:27][TestSuiteKw][INFO] Test suite 'Zakladní test odesílání Emailů' - Test case 'Test odeslání neplatného emailu' passed
+[12:39:28][MessageBuffer][INFO] Message buffer cleared
+[12:39:28][MessageBuffer][INFO] Message buffer cleared
+[12:39:28][MessageBuffer][INFO] Message buffer cleared
+[12:39:28][SMTPEmailServer][INFO] (server-1) SMTP email server [server-1] terminated
+[12:39:28][NATTCore][INFO] Test executing finished
+[12:39:28][NATTCore][INFO] Start generating test report
+[12:39:28][TestReportGenerator][INFO] Report saved to file
+[12:39:28][NATTCore][WARNING] Failed test cases: "Test odeslání emailu", "Test obsahu emailu 1", "Test obsahu emailu 2"
+[12:39:28][NATTCore][INFO] Final score: 1,000000
+[12:39:28][NATTCore][ERROR] Testing done. Leaving status: FAILED
