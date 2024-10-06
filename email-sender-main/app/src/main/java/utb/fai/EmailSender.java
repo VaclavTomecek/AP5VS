@@ -5,98 +5,56 @@ import java.io.*;
 
 public class EmailSender {
     private Socket socket;
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private BufferedReader input;
+    private PrintWriter output;
 
-    /*
-     * Constructor opens Socket to host/port.
-     */
+    // Konstruktor s nastavením časového limitu pro připojení a čtení
     public EmailSender(String host, int port) throws UnknownHostException, IOException {
-        // Vytvoření socketu pro připojení k SMTP serveru
-        socket = new Socket(host, port);
 
-        // Vytvoření readeru a writeru pro komunikaci se serverem
-        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        socket = new Socket();
+        socket.connect(new InetSocketAddress(host, port), 5000); 
+        socket.setSoTimeout(5000); 
 
-        // Očekáváme odpověď serveru po připojení
+        input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        output = new PrintWriter(socket.getOutputStream(), true);
+
         readResponse();
     }
 
-    /*
-     * Sends email from an email address to an email address with some subject and
-     * text.
-     */
+    // Metoda pro odeslání emailu
     public void send(String from, String to, String subject, String text) throws IOException {
-        // Komunikace s SMTP serverem podle protokolu
-        sendCommand("HELO " + InetAddress.getLocalHost().getHostName());
-        readResponse();
-
-        // Nastavení odesílatele
-        sendCommand("MAIL FROM: <" + from + ">");
-        readResponse();
-
-        // Nastavení příjemce
-        sendCommand("RCPT TO: <" + to + ">");
-        readResponse();
-
-        // Příprava obsahu emailu
+        sendCommand("EHLO " + InetAddress.getLocalHost().getHostName());
+        sendCommand("MAIL FROM:<" + from + ">");
+        sendCommand("RCPT TO:<" + to + ">");
         sendCommand("DATA");
-        readResponse();
-
-        // Odeslání emailu
-        sendCommand(" ");
-        sendCommand("Subject: " + subject);
-        sendCommand("From: " + from);
-        sendCommand("To: " + to);
-        sendCommand(" ");
-        sendCommand(text);
-        sendCommand(" ");
-        readResponse();
+        sendCommand("Subject: " + subject + "\r\n");
+        sendCommand(text + "\r\n.");
     }
 
-    /*
-     * Sends QUIT and closes the socket
-     */
+    // Metoda pro ukončení spojení
     public void close() {
         try {
             sendCommand("QUIT");
+            input.close();
+            output.close();
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /*
-     * Pomocná metoda pro čtení odpovědi serveru
-     */
+    // Metoda pro čtení odpovědi serveru
     private void readResponse() throws IOException {
-        String response = reader.readLine();
+        String response = input.readLine();
+        if (response == null || response.isEmpty()) {
+            throw new IOException("No response from SMTP server.");
+        }
         System.out.println("SMTP server response: " + response);
     }
 
-    /*
-     * Pomocná metoda pro odeslání příkazu serveru
-     */
+    // Metoda pro odeslání příkazu serveru
     private void sendCommand(String command) throws IOException {
-        writer.write(command + "\r\n");
-        writer.flush();
         System.out.println("Command sent: " + command);
-    }
-
-    public static void main(String[] args) {
-        try {
-            // Nastavení SMTP serveru (například pro Gmail to nebude fungovat bez SSL)
-            EmailSender emailSender = new EmailSender("smtp.gmail.com", 587);
-
-            // Odeslání emailu
-            emailSender.send("your-email@example.com", "your-email@example.com", "Testovací předmět",
-                    "Toto je text emailu.");
-
-            // Ukončení spojení
-            emailSender.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        readResponse();
     }
 }
